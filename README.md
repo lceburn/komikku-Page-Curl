@@ -1,3 +1,23 @@
+> ## This is a personal fork — **Komikku Page Curl**
+>
+> Forked from [Komikku](https://github.com/komikku-app/komikku) at v1.14.1 by
+> [lceburn](https://github.com/lceburn). **Not affiliated with, endorsed by, or supported by
+> the Komikku, Mihon or TachiyomiSY projects.** Please do not report bugs from this build to
+> them — open an issue here instead.
+>
+> **What it adds:** an animated page turn in the horizontal pager reader.
+>
+> - **Single page** — a finger-driven curl that follows where you drag
+> - **Double page** — the page pivots about the spine like a real book, with the curl
+>   composed on top so it still tracks your finger
+> - Both fade the bend out at the end so the hand-over to the normal page view is seamless
+> - Page textures are decoded off the UI thread, so a turn does not stutter on its first frame
+>
+> Everything else — sources, extensions, library, sync, backups — is stock Komikku.
+>
+> See [NOTICE](NOTICE) for the modification notice required by Apache-2.0 §4(b), and
+> [PAGE_CURL.md](PAGE_CURL.md) for how the animation works.
+
 <div align="center">
 
 <a href="https://komikku-app.github.io">

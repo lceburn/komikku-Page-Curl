@@ -1,0 +1,60 @@
+Komikku Page Curl
+=================
+
+This product is a modified version of Komikku, and includes material from Komikku,
+Mihon and TachiyomiSY.
+
+    Komikku      https://github.com/komikku-app/komikku
+    Mihon        https://github.com/mihonapp/mihon
+    TachiyomiSY  https://github.com/tachiyomiorg/tachiyomiSY
+
+Modification notice - Apache License 2.0, section 4(b)
+-----------------------------------------------------
+This repository is a modified copy of the Komikku 1.14.1 sources. The files listed
+below have been changed from upstream by lceburn (https://github.com/lceburn), 2026.
+Each file also carries inline notices where the change is not self-evident.
+
+Added:
+  PAGE_CURL.md
+      Design notes for the page-turn animation.
+  app/src/main/java/eu/kanade/tachiyomi/ui/reader/viewer/pager/CurlGeometry.kt
+      Orthographic sheet geometry: a cylinder curl for single pages and a rigid
+      spine pivot (optionally carrying that curl) for double-page spreads.
+  app/src/main/java/eu/kanade/tachiyomi/ui/reader/viewer/pager/PageCurlRenderer.kt
+      Depth-sorted, lit triangle mesh renderer with separate artwork per face.
+  app/src/test/java/eu/kanade/tachiyomi/ui/reader/viewer/pager/CurlGeometryTest.kt
+      Unit tests for the geometry.
+
+Modified:
+  app/src/main/java/eu/kanade/tachiyomi/ui/reader/viewer/pager/Pager.kt
+      Drives the animation: gesture tracking, progress, off-thread texture decode.
+  app/src/main/java/eu/kanade/tachiyomi/ui/reader/viewer/pager/PagerConfig.kt
+      Passes the reader canvas colour through to the pager.
+  app/src/main/java/eu/kanade/tachiyomi/ui/reader/viewer/pager/PagerViewerAdapter.kt
+      Exposes the viewer so the pager can read spread settings.
+  app/src/main/java/eu/kanade/tachiyomi/ui/reader/setting/ReaderPreferences.kt
+      Preference backing the page-curl toggle.
+  app/src/main/java/eu/kanade/presentation/reader/settings/ReadingModePage.kt
+      Reader settings UI for the toggle.
+  app/src/main/java/eu/kanade/presentation/more/settings/screen/SettingsReaderScreen.kt
+      Surfaces the reader settings entry.
+  i18n-kmk/src/commonMain/moko-resources/base/strings.xml
+      Strings for the new setting.
+  gradle/libs.versions.toml
+      Pins a FlexibleAdapter build that exists on JitPack.
+
+Removed:
+  .github/workflows/build_preview.yml, build_release.yml, build_push.yml,
+  build_dispatch_preview.yml, update_website.yml, codeberg_mirror.yml,
+  build_benchmark.yml
+      These upstream workflows depend on secrets held only by the Komikku
+      organisation (signing keys, google-services.json, BOT_PAT, CODEBERG_SSH)
+      and publish to the Komikku website and Codeberg mirror. They cannot run in
+      a fork and failed on every push. They are replaced by two self-contained
+      workflows: build_pull_request.yml (format gate + build) and
+      build_fork_release.yml (builds and attaches APKs to a release on a v* tag).
+
+No networking, source, extension, or data-layer behaviour is altered by these
+changes; they are confined to the horizontal pager reader and its settings.
+
+Licensed under the Apache License, Version 2.0. See LICENSE for the full text.

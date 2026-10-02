@@ -180,7 +180,18 @@ class PagerConfig(
 
         // SY -->
         readerPreferences.pageTransitionsPager()
-            .register({ usePageTransitions = it }, { imagePropertyChangedListener?.invoke() })
+            .register(
+                { usePageTransitions = it },
+                {
+                    viewer.pager.setPageCurlEnabled(it && readerPreferences.pageCurl().get())
+                    imagePropertyChangedListener?.invoke()
+                },
+            )
+
+        // KMK -->
+        readerPreferences.pageCurl()
+            .register({ viewer.pager.setPageCurlEnabled(it && readerPreferences.pageTransitionsPager().get()) })
+        // KMK <--
 
         readerPreferences.pageLayout()
             .register(
@@ -268,5 +279,8 @@ class PagerConfig(
             2 -> 0x202125
             else -> Color.WHITE
         }
+        // KMK -->
+        viewer.pager.pageCurlBackgroundColor = pageCanvasColor or (0xFF shl 24)
+        // KMK <--
     }
 }

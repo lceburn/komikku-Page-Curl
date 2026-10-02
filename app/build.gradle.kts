@@ -26,7 +26,7 @@ android {
     namespace = "eu.kanade.tachiyomi"
 
     defaultConfig {
-        applicationId = "app.komikku"
+        applicationId = "io.github.lceburn.komikku"
 
         versionCode = 81
         versionName = "1.14.1"

@@ -17,6 +17,10 @@ class ReaderPreferences(
 
     // region General
 
+    // KMK -->
+    fun pageCurl() = preferenceStore.getBoolean("pref_reader_page_curl", false)
+    // KMK <--
+
     // SY -->
     fun pageTransitionsPager() = preferenceStore.getBoolean("pref_enable_transitions_pager_key", true)
 

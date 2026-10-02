@@ -1,21 +1,20 @@
-name: PR build check
+name: Build fork APKs
 
 on:
-  pull_request:
-    paths-ignore:
-      - '**.md'
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
-
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
-    name: Build app
     runs-on: 'ubuntu-24.04'
 
     steps:
@@ -39,5 +38,24 @@ jobs:
       - name: Check code format
         run: ./gradlew spotlessCheck
 
-      - name: Build app
+      - name: Build APKs
         run: ./gradlew assembleDebug
+
+      - name: Collect APKs
+        run: |
+          mkdir -p out
+          cp app/build/outputs/apk/debug/*.apk out/
+
+      - name: Upload as workflow artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: komikku-pagecurl-apks
+          path: out/*.apk
+          if-no-files-found: error
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # v3.0.1
+        with:
+          files: out/*.apk
+          generate_release_notes: true

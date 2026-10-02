@@ -307,6 +307,14 @@ object SettingsReaderScreen : SearchableSettings {
                     title = stringResource(MR.strings.pref_page_transitions),
                 ),
                 // SY <--
+                // KMK -->
+                Preference.PreferenceItem.SwitchPreference(
+                    preference = readerPreferences.pageCurl(),
+                    title = stringResource(KMR.strings.pref_page_curl),
+                    subtitle = stringResource(KMR.strings.pref_page_curl_summary),
+                    enabled = readerPreferences.pageTransitionsPager().collectAsState().value,
+                ),
+                // KMK <--
                 Preference.PreferenceItem.SwitchPreference(
                     preference = landscapeZoomPref,
                     title = stringResource(MR.strings.pref_landscape_zoom),
