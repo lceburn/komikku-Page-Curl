@@ -43,6 +43,17 @@ Modified:
   gradle/libs.versions.toml
       Pins a FlexibleAdapter build that exists on JitPack.
 
+Removed:
+  .github/workflows/build_preview.yml, build_release.yml, build_push.yml,
+  build_dispatch_preview.yml, update_website.yml, codeberg_mirror.yml,
+  build_benchmark.yml
+      These upstream workflows depend on secrets held only by the Komikku
+      organisation (signing keys, google-services.json, BOT_PAT, CODEBERG_SSH)
+      and publish to the Komikku website and Codeberg mirror. They cannot run in
+      a fork and failed on every push. They are replaced by two self-contained
+      workflows: build_pull_request.yml (format gate + build) and
+      build_fork_release.yml (builds and attaches APKs to a release on a v* tag).
+
 No networking, source, extension, or data-layer behaviour is altered by these
 changes; they are confined to the horizontal pager reader and its settings.
 
