@@ -13,6 +13,7 @@ import eu.kanade.tachiyomi.ui.reader.setting.ReaderOrientation
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderSettingsScreenModel
 import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
+import eu.kanade.tachiyomi.ui.reader.viewer.pager.VerticalPagerViewer
 import eu.kanade.tachiyomi.ui.reader.viewer.webtoon.WebtoonViewer
 import tachiyomi.i18n.MR
 import tachiyomi.i18n.kmk.KMR
@@ -173,6 +174,17 @@ private fun PagerViewerSettings(screenModel: ReaderSettingsScreenModel) {
         label = stringResource(MR.strings.pref_page_transitions),
         pref = screenModel.preferences.pageTransitionsPager(),
     )
+
+    // KMK -->
+    val pageTransitions by screenModel.preferences.pageTransitionsPager().collectAsState()
+    val viewer by screenModel.viewerFlow.collectAsState()
+    if (pageTransitions && viewer !is VerticalPagerViewer) {
+        CheckboxItem(
+            label = stringResource(KMR.strings.pref_page_curl),
+            pref = screenModel.preferences.pageCurl(),
+        )
+    }
+    // KMK <--
 
     CheckboxItem(
         label = stringResource(SYMR.strings.invert_double_pages),

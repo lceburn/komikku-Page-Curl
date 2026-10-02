@@ -20,7 +20,7 @@ import tachiyomi.core.common.util.system.logcat
  * Pager adapter used by this [viewer] to where [ViewerChapters] updates are posted.
  */
 class PagerViewerAdapter(
-    private val viewer: PagerViewer,
+    val viewer: PagerViewer,
     // KMK -->
     @ColorInt private val seedColor: Int? = null,
     // KMK <--
