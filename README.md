@@ -18,6 +18,61 @@
 > See [NOTICE](NOTICE) for the modification notice required by Apache-2.0 §4(b), and
 > [PAGE_CURL.md](PAGE_CURL.md) for how the animation works.
 
+## Page curl demo
+
+**Single page — the curl follows your finger**
+
+![Single-page page curl: drag and the page peels over, tracking your finger](docs/page-curl-demo.webp)
+
+*Portrait. Shown at 0.6x speed — at full speed the turn is over in about a second.*
+
+**Double page — the spread turns about the spine, like a book**
+
+![Open-book page turn: the double-page spread pivots about the centre spine](docs/book-turn-demo.webp)
+
+*Real time, 30 s — the ten-second turn above, looped three times so it reads at a glance.
+The finger-driven curl is composed on top of the spine pivot, so the page still tracks your
+finger as it turns.*
+
+## Switching from Komikku
+
+This fork has its own package id (`io.github.lceburn.komikku`), so Android treats it as a
+**separate app**. It installs **alongside** your existing Komikku — nothing is overwritten,
+and the two can coexist while you compare — but it starts with an empty library.
+
+Bring everything across with a backup:
+
+1. **In your existing Komikku** — **More → Settings → Data and storage → Create backup**.
+   Leave the options alone and confirm. You get a `.tachibk` file, by default under
+   `Komikku/backup/` on your device.
+2. **Install Komikku Page Curl.**
+3. **On first launch it offers to restore** — choose **Restore backup** and pick that
+   `.tachibk` file. Missed it? **More → Settings → Data and storage → Restore backup**.
+4. **Reinstall your extensions.** The backup carries your library, categories, reading
+   history and settings — but *not* the extension APKs. The app says so itself: *"You may
+   need to install any missing extensions and log in to tracking services afterwards to
+   use them."* It will list anything missing so you know what to re-add.
+
+Your library, read progress and history come across. Once you are happy, you can uninstall
+the old Komikku — or keep both.
+
+## Troubleshooting
+
+### A manga won't load, or sits on the loading spinner forever
+
+Nearly always a **stale chapter cache**: the cached page list points at image URLs that
+have since expired, so streaming fails. The tell is that **downloading the chapter still
+works** while streaming does not.
+
+**Fix:** **More → Settings → Data and storage → Clear chapter cache**, then reopen the
+chapter. If it keeps happening, turn on **Clear chapter cache on app launch** on the same
+screen.
+
+### Downloaded chapters look wrong or out of sync
+
+Use **Reindex downloads** on the same screen — *"force app to recheck downloaded
+chapters."* It rebuilds the download index without deleting your files.
+
 <div align="center">
 
 <a href="https://komikku-app.github.io">
