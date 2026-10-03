@@ -30,8 +30,9 @@
 
 ![Open-book page turn: the double-page spread pivots about the centre spine](docs/book-turn-demo.webp)
 
-*Real time, two page turns. The finger-driven curl is composed on top of the spine pivot,
-so the page still tracks your finger as it turns.*
+*Real time, 30 s — the ten-second turn above, looped three times so it reads at a glance.
+The finger-driven curl is composed on top of the spine pivot, so the page still tracks your
+finger as it turns.*
 
 ## Switching from Komikku
 
